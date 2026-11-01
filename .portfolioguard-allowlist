@@ -1,0 +1,3 @@
+# False positives that are not secrets
+# Version headings can look like phone numbers to the digit matcher.
+CHANGELOG.md:phone_number

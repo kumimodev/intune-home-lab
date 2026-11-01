@@ -1,0 +1,14 @@
+# Local lab outputs
+*.csv
+merged-hardware-hash.csv
+*.log
+.DS_Store
+Thumbs.db
+
+# Never commit real installers
+*.exe
+*.msi
+*.msp
+*.cab
+*.iso
+*.intunewin

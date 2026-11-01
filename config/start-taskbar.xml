@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LayoutModificationTemplate
+    xmlns="http://schemas.microsoft.com/Start/2014/LayoutModification"
+    xmlns:defaultlayout="http://schemas.microsoft.com/Start/2014/FullDefaultLayout"
+    xmlns:start="http://schemas.microsoft.com/Start/2014/StartLayout"
+    xmlns:taskbar="http://schemas.microsoft.com/Start/2014/TaskbarLayout"
+    Version="1">
+  <LayoutOptions StartTileGroupCellWidth="6" />
+
+  <DefaultLayoutOverride>
+    <StartLayoutCollection>
+      <defaultlayout:StartLayout GroupCellWidth="6">
+        <start:Group Name="Pinned">
+          <start:DesktopApplicationTile Size="2x2" Column="0" Row="0" DesktopApplicationID="Microsoft.Office.WINWORD.EXE.15" />
+          <start:DesktopApplicationTile Size="2x2" Column="2" Row="0" DesktopApplicationID="Microsoft.Office.EXCEL.EXE.15" />
+          <start:DesktopApplicationTile Size="2x2" Column="4" Row="0" DesktopApplicationID="Microsoft.Office.POWERPNT.EXE.15" />
+          <start:Tile Size="2x2" Column="0" Row="2" AppUserModelID="Microsoft.OutlookForWindows_8wekyb3d8bbwe!Microsoft.OutlookforWindows" />
+          <start:Tile Size="2x2" Column="2" Row="2" AppUserModelID="Microsoft.Paint_8wekyb3d8bbwe!App" />
+          <start:Tile Size="2x2" Column="4" Row="2" AppUserModelID="windows.immersivecontrolpanel_cw5n1h2txyewy!microsoft.windows.immersivecontrolpanel" />
+          <start:Tile Size="2x2" Column="0" Row="4" AppUserModelID="Microsoft.WindowsCalculator_8wekyb3d8bbwe!App" />
+          <start:Tile Size="2x2" Column="2" Row="4" AppUserModelID="Microsoft.WindowsNotepad_8wekyb3d8bbwe!App" />
+          <start:Tile Size="2x2" Column="4" Row="4" AppUserModelID="Microsoft.ScreenSketch_8wekyb3d8bbwe!App" />
+          <start:Tile Size="2x2" Column="0" Row="6" AppUserModelID="Microsoft.MicrosoftStickyNotes_8wekyb3d8bbwe!App" />
+        </start:Group>
+      </defaultlayout:StartLayout>
+    </StartLayoutCollection>
+  </DefaultLayoutOverride>
+
+  <CustomTaskbarLayoutCollection PinListPlacement="Replace">
+    <defaultlayout:TaskbarLayout>
+      <taskbar:TaskbarPinList>
+        <taskbar:DesktopApp DesktopApplicationID="Microsoft.Windows.Explorer" />
+        <taskbar:UWA AppUserModelID="Microsoft.OutlookForWindows_8wekyb3d8bbwe!Microsoft.OutlookforWindows" />
+        <taskbar:DesktopApp DesktopApplicationID="MSEdge" />
+        <taskbar:UWA AppUserModelID="Microsoft.CompanyPortal_8wekyb3d8bbwe!App" />
+        <taskbar:UWA AppUserModelID="MSTeams_8wekyb3d8bbwe!MSTeams" />
+      </taskbar:TaskbarPinList>
+    </defaultlayout:TaskbarLayout>
+  </CustomTaskbarLayoutCollection>
+</LayoutModificationTemplate>
