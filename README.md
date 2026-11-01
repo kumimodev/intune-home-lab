@@ -1,3 +1,5 @@
+![intune-home-lab banner](.github/banner.png)
+
 # intune-home-lab
 
 Scripts and notes from a personal Microsoft Intune home lab. The goal is a small, repeatable setup you can run on a trial tenant for learning Autopilot, remediations, Win32 apps, and clean Windows images.
