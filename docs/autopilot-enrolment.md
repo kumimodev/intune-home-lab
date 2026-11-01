@@ -14,7 +14,7 @@ The file name includes the current username so you can tell devices apart when y
 
 ## Collect username, hostname, and serial
 
-`scripts/collect-device-info.bat` writes a small text file to the current user Downloads folder. It is handy when you want a quick label for the Autopilot record without opening System Information by hand.
+The companion `it-admin-toolkit` script `windows/collect-device-info.bat` writes a small text file to the current user Downloads folder. It is handy when you want a quick label for the Autopilot record without opening System Information by hand.
 
 ## Merge several CSV files
 

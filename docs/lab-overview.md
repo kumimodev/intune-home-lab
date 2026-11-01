@@ -18,7 +18,7 @@ I wanted a place to practise Autopilot enrolment, proactive remediations, Win32 
 
 1. Boot the device from clean media or a reset PC.
 2. Run `autopilot/collect-hardware-hash.bat` as administrator.
-3. Optionally run `scripts/collect-device-info.bat` so you have username, hostname, and serial number in one text file.
+3. Optionally run `windows/collect-device-info.bat` from the companion `it-admin-toolkit` repo so you have username, hostname, and serial number in one text file.
 4. Merge CSVs with `autopilot/merge-hardware-hash.ps1` if you collected more than one device.
 5. Import the CSV into Intune Autopilot devices and assign a deployment profile.
 6. Reset the device and let Autopilot enrol it into Entra ID and Intune.
