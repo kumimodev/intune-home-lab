@@ -2,9 +2,9 @@
 
 # intune-home-lab
 
-Scripts and notes from a personal Microsoft Intune home lab. The goal is a small, repeatable setup you can run on a trial tenant for learning Autopilot, remediations, Win32 apps and clean Windows images.
+Scripts and notes from a personal Microsoft Intune home lab. Aim is a small setup you can run again on a trial tenant while you learn Autopilot, remediations, Win32 apps, and clean Windows images.
 
-These samples are aimed at a home lab or a small business style trial. They are not a production runbook.
+These samples are for a home lab or a small business style trial. They are not a production runbook.
 
 ## Lab licensing used here
 

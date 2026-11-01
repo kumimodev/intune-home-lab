@@ -2,6 +2,12 @@
 
 All notable changes to this project are listed here.
 
+## Copy update, 1 Nov 2026
+
+### Changed
+
+1. Tidied the README opening lines so they read a bit more naturally.
+
 ## Version 0.3.1 (1 Nov 2026)
 
 ### Changed
