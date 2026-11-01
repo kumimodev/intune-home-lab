@@ -1,21 +1,28 @@
-# Detection: Singapore Standard Time and en-SG locale settings.
-# Exit 0 = healthy. Exit 1 = needs remediation.
+#Requires -Version 5.1
+<#
+.SYNOPSIS
+  Detection for Singapore Standard Time and en-SG locale settings.
 
-$ErrorActionPreference = 'SilentlyContinue'
+.DESCRIPTION
+  Intune proactive remediation detection.
+  Exit 0 when healthy. Exit 1 when remediation should run.
+#>
+[CmdletBinding()]
+param()
 
-$CurrentTimeZone = (Get-TimeZone).Id
-$CurrentSysLocale = (Get-WinSystemLocale).Name
-$CurrentUILang = (Get-WinUILanguageOverride).Name
-if (-not $CurrentUILang) {
-    $CurrentUILang = (Get-WinUILanguageOverride)
-}
-$CurrentKeyboard = (Get-WinUserLanguageList)[0].LanguageTag
+$ErrorActionPreference = 'Stop'
+
+$currentTimeZone = (Get-TimeZone).Id
+$currentSysLocale = (Get-WinSystemLocale).Name
+$ui = Get-WinUILanguageOverride
+$currentUILang = if ($ui -and $ui.Name) { $ui.Name } else { [string]$ui }
+$currentKeyboard = (Get-WinUserLanguageList)[0].LanguageTag
 
 if (
-    $CurrentTimeZone -eq 'Singapore Standard Time' -and
-    $CurrentSysLocale -eq 'en-SG' -and
-    $CurrentUILang -eq 'en-SG' -and
-    $CurrentKeyboard -eq 'en-SG'
+    $currentTimeZone -eq 'Singapore Standard Time' -and
+    $currentSysLocale -eq 'en-SG' -and
+    $currentUILang -eq 'en-SG' -and
+    $currentKeyboard -eq 'en-SG'
 ) {
     Write-Output 'Localisation is set to en-SG with Singapore Standard Time.'
     exit 0

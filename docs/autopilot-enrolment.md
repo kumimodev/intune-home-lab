@@ -5,7 +5,7 @@ These notes match the scripts in `autopilot/`.
 ## Collect a hardware hash
 
 1. Sign in to the device as a local admin, or open an elevated command prompt from WinPE if you are that far along.
-2. Copy `collect-hardware-hash.bat` to the device.
+2. Copy `Get-AutopilotHardwareHash.ps1` to the device.
 3. Run it as administrator.
 4. Accept the PowerShell Gallery prompts for `Get-WindowsAutopilotInfo` if this is the first run.
 5. Find the CSV under `C:\ForInTuneEnrolment\`.
@@ -14,15 +14,15 @@ The file name includes the current username so you can tell devices apart when y
 
 ## Collect username, hostname, and serial
 
-The companion `it-admin-toolkit` script `windows/collect-device-info.bat` writes a small text file to the current user Downloads folder. It is handy when you want a quick label for the Autopilot record without opening System Information by hand.
+The companion `it-admin-toolkit` script `windows/Get-LabDeviceInfo.ps1` writes a small text file to the current user Downloads folder. It is handy when you want a quick label for the Autopilot record without opening System Information by hand.
 
 ## Merge several CSV files
 
-1. Put every Autopilot CSV in one folder with `merge-hardware-hash.ps1`.
+1. Put every Autopilot CSV in one folder with `Merge-AutopilotHardwareHash.ps1`.
 2. Run the script in PowerShell.
 3. Upload `merged-hardware-hash.csv` to Intune.
 
-If you want a Group Tag on every row, use `merge-hardware-hash-with-tag.ps1` and edit the tag value at the top of the file. The sample tag is `LAB`. Change it to whatever your Autopilot profile filters on.
+If you want a Group Tag on every row, use `Merge-AutopilotHardwareHash.ps1 -GroupTag` and edit the tag value at the top of the file. The sample tag is `LAB`. Change it to whatever your Autopilot profile filters on.
 
 ## Import into Intune
 

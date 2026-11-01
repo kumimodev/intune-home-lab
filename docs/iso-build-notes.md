@@ -11,7 +11,7 @@ Rename them to `Win10.iso` and `Win11.iso`. Place both under `C:\temp\ISO\`.
 
 ## Merge Pro editions into one folder tree
 
-1. Run `MergeISO-ESD.bat` or `MergeISO-WIM.bat` as administrator, depending on whether your media uses `install.esd` or `install.wim`.
+1. Run `Merge-WindowsLabIso.ps1` or `Merge-WindowsLabIso.ps1` as administrator, depending on whether your media uses `install.esd` or `install.wim`.
 2. Confirm DISM lists only Windows 10 Pro and Windows 11 Pro when the script finishes.
 3. Source index `6` is the usual Pro index on retail media, but always check with `DISM /Get-WimInfo` on your files before you trust it.
 

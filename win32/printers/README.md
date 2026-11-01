@@ -1,23 +1,8 @@
-# Generic TCP/IP printer Win32 sample
+# Lab printer Win32 pattern
 
-Install a printer from an INF driver, create a TCP/IP port, then register the printer.
+| Script | Purpose |
+| --- | --- |
+| `Install-LabPrinter.ps1` | Stage INF driver, port and printer |
+| `Uninstall-LabPrinter.ps1` | Remove printer by name |
 
-## Example Intune install command
-
-```text
-powershell.exe -ExecutionPolicy Bypass -File .\install-printer.ps1 -PortName "IP_10.0.0.50" -PrinterIP "10.0.0.50" -PrinterName "Lab Printer 01" -DriverName "Generic Lab Driver" -INFFile "labprinter.inf"
-```
-
-## Example uninstall command
-
-```text
-powershell.exe -ExecutionPolicy Bypass -File .\uninstall-printer.ps1 -PrinterName "Lab Printer 01"
-```
-
-## Detection idea
-
-Look for the printer name under:
-
-`HKLM\Software\Microsoft\Windows NT\CurrentVersion\Print\Printers\Lab Printer 01`
-
-Ship the INF and driver files beside the scripts in your Win32 package. The sample addresses use the `10.0.0.x` range only.
+Use `10.0.0.x` style sample addresses only. Package with the vendor INF beside the install script when you build the `.intunewin` file.

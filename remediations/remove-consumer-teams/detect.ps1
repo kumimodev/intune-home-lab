@@ -1,10 +1,21 @@
-# Detection: Windows 11 consumer Microsoft Teams AppX package.
-# Exit 0 = not present. Exit 1 = present and should be removed.
+#Requires -Version 5.1
+<#
+.SYNOPSIS
+  Detection for the Windows 11 consumer Microsoft Teams AppX package.
 
-if ($null -eq (Get-AppxPackage -Name MicrosoftTeams -ErrorAction SilentlyContinue)) {
-    Write-Host 'Microsoft Teams consumer client not found.'
+.DESCRIPTION
+  Exit 0 when the package is not present. Exit 1 when remediation should remove it.
+#>
+[CmdletBinding()]
+param()
+
+$ErrorActionPreference = 'Stop'
+$pkg = Get-AppxPackage -Name 'MicrosoftTeams' -ErrorAction SilentlyContinue
+
+if ($null -eq $pkg) {
+    Write-Output 'Microsoft Teams consumer client not found.'
     exit 0
 }
 
-Write-Host 'Microsoft Teams consumer client found.'
+Write-Output 'Microsoft Teams consumer client found.'
 exit 1

@@ -1,39 +1,55 @@
-# Detection: selected inbox apps that a lab business desktop usually does not need.
-# Exit 0 = clean. Exit 1 = at least one listed app is installed or provisioned.
+#Requires -Version 5.1
+<#
+.SYNOPSIS
+  Detection for selected inbox apps that a lab business desktop usually does not need.
+
+.DESCRIPTION
+  Exit 0 when clean. Exit 1 when at least one listed app is installed or provisioned.
+#>
+[CmdletBinding()]
+param()
+
+$ErrorActionPreference = 'Stop'
 
 $AppsList = @(
-    '*Microsoft.WindowsFeedbackHub*',
-    '*Clipchamp*',
-    '*Microsoft.BingNews*',
-    '*Microsoft.MicrosoftSolitaireCollection*',
-    '*Microsoft.BingWeather*',
-    '*Microsoft.Xbox*',
-    '*Microsoft.SkypeApp*',
-    '*Microsoft.ZuneVideo*',
-    '*Microsoft.ZuneMusic*',
-    '*Microsoft.People*',
-    '*Microsoft.GetHelp*',
-    '*Microsoft.YourPhone*',
-    '*Microsoft.Getstarted*'
+    'Microsoft.WindowsFeedbackHub',
+    'Clipchamp.Clipchamp',
+    'Microsoft.BingNews',
+    'Microsoft.MicrosoftSolitaireCollection',
+    'Microsoft.BingWeather',
+    'Microsoft.XboxApp',
+    'Microsoft.Xbox.TCUI',
+    'Microsoft.XboxGameOverlay',
+    'Microsoft.XboxGamingOverlay',
+    'Microsoft.XboxIdentityProvider',
+    'Microsoft.XboxSpeechToTextOverlay',
+    'Microsoft.SkypeApp',
+    'Microsoft.ZuneVideo',
+    'Microsoft.ZuneMusic',
+    'Microsoft.People',
+    'Microsoft.GetHelp',
+    'Microsoft.YourPhone',
+    'Microsoft.Getstarted'
 )
 
-$FoundApps = 0
+$found = New-Object System.Collections.Generic.List[string]
 
-foreach ($App in $AppsList) {
-    $CheckProvisioned = Get-AppxProvisionedPackage -Online |
-        Where-Object { $_.DisplayName -like $App -or $_.PackageName -like $App }
-    $CheckInstalled = Get-AppxPackage -Name $App -AllUsers -ErrorAction SilentlyContinue
+$installed = @(Get-AppxPackage -AllUsers -ErrorAction SilentlyContinue)
+$provisioned = @(Get-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue)
 
-    if ($CheckProvisioned -or $CheckInstalled) {
-        Write-Host "Found unwanted app matching pattern: $App"
-        $FoundApps++
+foreach ($app in $AppsList) {
+    $hitInstalled = $installed | Where-Object { $_.Name -like "$app*" -or $_.Name -eq $app }
+    $hitProvisioned = $provisioned | Where-Object { $_.DisplayName -like "$app*" -or $_.PackageName -like "*$app*" }
+    if ($hitInstalled -or $hitProvisioned) {
+        $found.Add($app) | Out-Null
+        Write-Output "Found unwanted app: $app"
     }
 }
 
-if ($FoundApps -gt 0) {
-    Write-Host 'Unwanted inbox apps detected.'
+if ($found.Count -gt 0) {
+    Write-Output 'Unwanted inbox apps detected.'
     exit 1
 }
 
-Write-Host 'No unwanted inbox apps found.'
+Write-Output 'No unwanted inbox apps found.'
 exit 0

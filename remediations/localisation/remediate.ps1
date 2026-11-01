@@ -1,15 +1,30 @@
-# Remediation: apply Singapore Standard Time and en-SG locale settings.
+#Requires -Version 5.1
+<#
+.SYNOPSIS
+  Remediation that applies Singapore Standard Time and en-SG locale settings.
 
-Set-TimeZone -Id 'Singapore Standard Time'
+.DESCRIPTION
+  Intune proactive remediation script. Exit 0 on success.
+#>
+[CmdletBinding()]
+param()
 
-Start-Service -Name W32Time -ErrorAction SilentlyContinue
-w32tm /resync /force | Out-Null
+$ErrorActionPreference = 'Stop'
 
-Set-WinSystemLocale -SystemLocale 'en-SG'
-Set-WinUILanguageOverride -Language 'en-SG'
+try {
+    Set-TimeZone -Id 'Singapore Standard Time'
+    Start-Service -Name W32Time -ErrorAction SilentlyContinue
+    & w32tm.exe /resync /force | Out-Null
 
-$LanguageList = New-WinUserLanguageList 'en-SG'
-Set-WinUserLanguageList $LanguageList -Force
+    Set-WinSystemLocale -SystemLocale 'en-SG'
+    Set-WinUILanguageOverride -Language 'en-SG'
+    $languageList = New-WinUserLanguageList -Language 'en-SG'
+    Set-WinUserLanguageList -LanguageList $languageList -Force
 
-Write-Output 'Localisation remediated to en-SG with Singapore Standard Time.'
-exit 0
+    Write-Output 'Localisation remediated to en-SG with Singapore Standard Time.'
+    exit 0
+}
+catch {
+    Write-Error $_.Exception.Message
+    exit 1
+}

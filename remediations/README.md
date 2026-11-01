@@ -1,6 +1,6 @@
 # Remediations
 
-Detect and remediate pairs for Intune proactive remediations.
+Detect and remediate pairs for Intune proactive remediations, plus taskbar default helpers.
 
 ## Convention
 
@@ -13,4 +13,4 @@ Detect and remediate pairs for Intune proactive remediations.
 1. `localisation/` sets Singapore Standard Time and `en-SG` locale values.
 2. `remove-consumer-teams/` clears the Windows 11 consumer Teams AppX package.
 3. `remove-inbox-apps/` removes a short list of inbox apps that rarely belong on a business style desktop.
-4. `taskbar-cleanup/` trims News, Search, Widgets, Chat, and Task View from the default user profile.
+4. `taskbar-cleanup/` trims News, Search, Widgets, Chat and Task View from default profiles (`Set-Win10TaskbarDefaults.ps1`, `Set-Win11TaskbarDefaults.ps1`).
