@@ -11,7 +11,7 @@
 .EXAMPLE
   .\Set-Win10TaskbarDefaults.ps1 -RemoveNews -RemoveSearchBar -RemoveTaskView
 #>
-[CmdletBinding()]
+[CmdletBinding(SupportsShouldProcess = $true)]
 param(
     [switch]$RemoveNews,
     [switch]$RemoveSearchBar,
@@ -19,6 +19,10 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
+if (-not $PSCmdlet.ShouldProcess('Windows 10 taskbar defaults', 'Apply taskbar defaults')) {
+    return
+}
+
 
 if (-not ($RemoveNews -or $RemoveSearchBar -or $RemoveTaskView)) {
     Write-Error 'Specify at least one of -RemoveNews, -RemoveSearchBar, -RemoveTaskView.'

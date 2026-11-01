@@ -11,7 +11,7 @@
 .EXAMPLE
   .\Set-Win11TaskbarDefaults.ps1 -RemoveTaskView -RemoveWidgets -RemoveChat -RemoveSearch
 #>
-[CmdletBinding()]
+[CmdletBinding(SupportsShouldProcess = $true)]
 param(
     [switch]$RemoveTaskView,
     [switch]$RemoveWidgets,
@@ -20,6 +20,10 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
+if (-not $PSCmdlet.ShouldProcess('Windows 11 taskbar defaults', 'Apply taskbar defaults')) {
+    return
+}
+
 
 if (-not ($RemoveTaskView -or $RemoveWidgets -or $RemoveChat -or $RemoveSearch)) {
     Write-Error 'Specify at least one of -RemoveTaskView, -RemoveWidgets, -RemoveChat, -RemoveSearch.'

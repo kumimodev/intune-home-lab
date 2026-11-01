@@ -25,7 +25,7 @@
 .EXAMPLE
   .\Unregister-HomeLabPrinter.ps1 -PrinterName 'Lab Floor Printer' -PortName 'IP_printer_lab_local' -RemovePort
 #>
-[CmdletBinding()]
+[CmdletBinding(SupportsShouldProcess = $true)]
 param(
     [Parameter(Mandatory = $true)]
     [ValidateNotNullOrEmpty()]
@@ -38,6 +38,10 @@ param(
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
+if (-not $PSCmdlet.ShouldProcess($PrinterName, 'Unregister lab printer')) {
+    return
+}
+
 
 function Invoke-Wow64Relaunch {
     if ($env:PROCESSOR_ARCHITEW6432 -ne 'AMD64') {

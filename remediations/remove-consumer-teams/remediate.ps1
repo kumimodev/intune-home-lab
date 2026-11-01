@@ -6,10 +6,14 @@
 .DESCRIPTION
   Also clears matching provisioned packages when present. Exit 0 on success.
 #>
-[CmdletBinding()]
+[CmdletBinding(SupportsShouldProcess = $true)]
 param()
 
 $ErrorActionPreference = 'Stop'
+if (-not $PSCmdlet.ShouldProcess('consumer Teams packages', 'Remove consumer Teams packages')) {
+    return
+}
+
 
 try {
     Get-AppxPackage -Name 'MicrosoftTeams' -ErrorAction SilentlyContinue |

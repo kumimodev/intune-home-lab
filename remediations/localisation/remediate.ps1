@@ -6,10 +6,14 @@
 .DESCRIPTION
   Intune proactive remediation script. Exit 0 on success.
 #>
-[CmdletBinding()]
+[CmdletBinding(SupportsShouldProcess = $true)]
 param()
 
 $ErrorActionPreference = 'Stop'
+if (-not $PSCmdlet.ShouldProcess('en-SG localisation', 'Apply lab localisation settings')) {
+    return
+}
+
 
 try {
     Set-TimeZone -Id 'Singapore Standard Time'

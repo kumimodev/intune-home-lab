@@ -13,24 +13,37 @@
 
 .EXAMPLE
   .\Get-AutopilotHardwareHash.ps1
+
+.EXAMPLE
+  .\Get-AutopilotHardwareHash.ps1 -WhatIf
 #>
-[CmdletBinding()]
+[CmdletBinding(SupportsShouldProcess = $true)]
 param(
     [string]$OutputDirectory = 'C:\LabAutopilot'
 )
 
 $ErrorActionPreference = 'Stop'
 
-if (-not (Test-Path -LiteralPath $OutputDirectory)) {
-    New-Item -ItemType Directory -Path $OutputDirectory -Force | Out-Null
+if (-not $PSCmdlet.ShouldProcess($OutputDirectory, 'Collect Autopilot hardware hash')) {
+    return
 }
 
-$env:Path += ';C:\Program Files\WindowsPowerShell\Scripts'
-if (-not (Get-Command Get-WindowsAutopilotInfo -ErrorAction SilentlyContinue)) {
-    Install-Script -Name Get-WindowsAutopilotInfo -Force -Scope CurrentUser
-}
+try {
+    if (-not (Test-Path -LiteralPath $OutputDirectory)) {
+        New-Item -ItemType Directory -Path $OutputDirectory -Force | Out-Null
+    }
 
-$outFile = Join-Path $OutputDirectory ("AutopilotHWID_{0}.csv" -f $env:USERNAME)
-Get-WindowsAutopilotInfo -OutputFile $outFile
-Write-Output "Hardware hash exported to $outFile"
-exit 0
+    $env:Path += ';C:\Program Files\WindowsPowerShell\Scripts'
+    if (-not (Get-Command Get-WindowsAutopilotInfo -ErrorAction SilentlyContinue)) {
+        Install-Script -Name Get-WindowsAutopilotInfo -Force -Scope CurrentUser
+    }
+
+    $outFile = Join-Path $OutputDirectory ("AutopilotHWID_{0}.csv" -f $env:USERNAME)
+    Get-WindowsAutopilotInfo -OutputFile $outFile
+    Write-Output "Hardware hash exported to $outFile"
+    exit 0
+}
+catch {
+    Write-Error "Autopilot hash collection failed: $($_.Exception.Message)"
+    exit 1
+}

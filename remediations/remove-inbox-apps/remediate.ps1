@@ -6,9 +6,15 @@
 .DESCRIPTION
   Idempotent where packages are already absent. Exit 0 when finished.
 #>
-[CmdletBinding()]
+[CmdletBinding(SupportsShouldProcess = $true)]
 param()
 
+
+if (-not $PSCmdlet.ShouldProcess('inbox apps list', 'Remove listed inbox apps')) {
+    return
+}
+
+try {
 $ErrorActionPreference = 'Continue'
 
 $AppsList = @(
@@ -46,3 +52,8 @@ foreach ($app in $AppsList) {
 
 Write-Output 'Selected inbox apps removed where present.'
 exit 0
+}
+catch {
+    Write-Output "Remediation failed: $($_.Exception.Message)"
+    exit 1
+}

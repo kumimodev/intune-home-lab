@@ -30,7 +30,7 @@
 .EXAMPLE
   .\Merge-WindowsLabIso.ps1 -Windows10Iso 'C:\LabISO\Win10.iso' -Windows11Iso 'C:\LabISO\Win11.iso'
 #>
-[CmdletBinding()]
+[CmdletBinding(SupportsShouldProcess = $true)]
 param(
     [Parameter(Mandatory = $true)]
     [string]$Windows10Iso,
@@ -49,6 +49,10 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
+if (-not $PSCmdlet.ShouldProcess($WorkRoot, 'Merge Windows lab ISO media')) {
+    return
+}
+
 
 foreach ($iso in @($Windows10Iso, $Windows11Iso)) {
     if (-not (Test-Path -LiteralPath $iso)) {

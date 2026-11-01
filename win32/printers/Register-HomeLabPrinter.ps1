@@ -36,7 +36,7 @@
 .EXAMPLE
   .\Register-HomeLabPrinter.ps1 -PrinterName 'Lab Floor Printer' -DriverName 'Contoso Laser Class Driver' -InfPath '.\driver\contoso.inf' -PortHost '10.0.0.50' -SetAsDefault
 #>
-[CmdletBinding()]
+[CmdletBinding(SupportsShouldProcess = $true)]
 param(
     [Parameter(Mandatory = $true)]
     [ValidateNotNullOrEmpty()]
@@ -61,6 +61,10 @@ param(
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
+if (-not $PSCmdlet.ShouldProcess($PrinterName, 'Register lab printer')) {
+    return
+}
+
 
 function Test-IsWow64Process {
     return ($env:PROCESSOR_ARCHITEW6432 -eq 'AMD64')

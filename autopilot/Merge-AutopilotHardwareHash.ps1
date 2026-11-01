@@ -22,7 +22,7 @@
 .EXAMPLE
   .\Merge-AutopilotHardwareHash.ps1 -GroupTag 'LAB'
 #>
-[CmdletBinding()]
+[CmdletBinding(SupportsShouldProcess = $true)]
 param(
     [string]$Path = $PSScriptRoot,
     [string]$GroupTag,
@@ -30,6 +30,13 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
+
+if (-not $PSCmdlet.ShouldProcess($Path, 'Merge Autopilot hardware hash CSV files')) {
+    return
+}
+
+try {
+
 
 if (-not $Path) {
     $Path = Split-Path -Parent $MyInvocation.MyCommand.Path
@@ -62,3 +69,8 @@ else {
     Write-Output "Wrote $outFile"
 }
 exit 0
+}
+catch {
+    Write-Error "Merge failed: $($_.Exception.Message)"
+    exit 1
+}
