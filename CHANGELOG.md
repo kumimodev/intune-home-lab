@@ -2,6 +2,12 @@
 
 All notable changes to this project are listed here.
 
+## Version 0.3.1 (1 Nov 2026)
+
+### Changed
+
+1. Replaced the printer Win32 samples with a clean room set (`Register-HomeLabPrinter.ps1`, `Unregister-HomeLabPrinter.ps1`, `Test-HomeLabPrinter.ps1`) written against Microsoft printer cmdlets only.
+
 ## Version 0.3.0 (1 Nov 2026)
 
 ### Changed
@@ -10,7 +16,7 @@ All notable changes to this project are listed here.
 2. Replaced Autopilot batch collector and dual merge scripts with `Get-AutopilotHardwareHash.ps1` and `Merge-AutopilotHardwareHash.ps1`.
 3. Replaced fragile ISO merge batch files with parameterised `Merge-WindowsLabIso.ps1`.
 4. Fixed Windows 10 taskbar helper so Default profile hive values are actually written.
-5. Printer installer logs under ProgramData and returns the 64 bit relaunch exit code correctly.
+5. Earlier printer installer work was later replaced by the clean room samples in 0.3.1.
 6. Inbox app detection now matches package names reliably instead of relying on wildcards in `-Name`.
 
 ## Version 0.2.0 (1 Nov 2026)
