@@ -22,8 +22,10 @@ You do not need Microsoft 365 Business Premium for the flows in this repo. Swap 
 3. `remediations/` holds detect and remediate pairs for common cleanup tasks.
 4. `win32/` has a generic printer installer pattern and Office deployment XML.
 5. `config/` has a Start and taskbar layout sample.
-6. `scripts/` covers day to day helpers such as updates, winget, and a secure local user prompt.
+6. `scripts/` points at the companion `it-admin-toolkit` repo for day to day Windows helpers.
 7. `docs/` explains how the pieces fit together.
+
+General IT admin scripts (winget, Defender signatures, scan share, Winsock, device info and similar) live in `it-admin-toolkit` so this repo stays Intune and Autopilot focused.
 
 ## How to use this safely
 

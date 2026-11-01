@@ -2,6 +2,19 @@
 
 All notable changes to this project are listed here.
 
+## Version 0.2.0 (1 Nov 2026)
+
+### Changed
+
+1. Moved general Windows and network helper scripts into the companion `it-admin-toolkit` repository.
+2. Left a short pointer under `scripts/` so older links still make sense.
+3. Kept Autopilot, ISO build, remediations, Win32 and Intune docs in this repo only.
+
+### Notes from Drive review
+
+1. The completed `intune from laptop` Drive folder was mostly vendor installers, workplace decks and personal exports. Almost nothing Intune specific was added from it.
+2. Edge settings exports and InPrivate allow lists stayed private because they reflected a live workplace allow list.
+
 ## Version 0.1.0 (1 Nov 2026)
 
 ### Added
